@@ -32,6 +32,7 @@ function App() {
   const recordTime = () => {
     // using the same time in setInterval
     setStoreTime(time);
+    //flip the value
     setButton(!isButton);
   };
 
