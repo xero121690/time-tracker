@@ -41,19 +41,61 @@ function App() {
     localStorage.setItem("userData", JSON.stringify(storeTime));
   };
 
+  const calculateAmPm = (oldAmPm, currentAmPm) => {
+    // within same morning /evening
+    if (oldAmPm == currentAmPm) {
+    }
+
+    // going from morning to evening
+    //
+    if (oldAmPm == "AM" && currentAmPm == "PM") {
+    }
+
+    //going from evening to morning
+    if (oldAmPm == "PM" && currentAmPm == "AM") {
+    }
+  };
+
   const displayTime = () => {
     //going to gather the time from first localstorage submission to present submission
     //buton to show time elapsed in minutes
-    const oldMinute = localStorage.getItem("userData")?.substring(4, 6);
 
-    const currentMinute = date.toLocaleTimeString([], {
-      minute: "2-digit",
-    });
+    //stored time
+    const storedTime = {
+      oldMinute: localStorage.getItem("userData")?.substring(4, 6),
+      oldHour: localStorage.getItem("userDate")?.substring(1, 3),
+      oldAmPM: localStorage.getItem("userDate")?.substring(10, 12),
+    };
+    // const oldMinute = localStorage.getItem("userData")?.substring(4, 6);
+    // const oldHour = localStorage.getItem("userDate")?.substring(1, 3);
+    // const oldAmPM = localStorage.getItem("userDate")?.substring(10, 12);
+
+    //current time
+    const currentTime = {
+      currentMinute: date.toLocaleTimeString([], {
+        minute: "2-digit",
+      }),
+      currentHour: date.toLocaleTimeString([], {
+        hour12: true,
+        hour: "2-digit",
+      }),
+      // "7:00:00 PM"
+      currentAmPm: date.toLocaleTimeString("en-US")?.substring(10, 12),
+    };
+    // const currentMinute = date.toLocaleTimeString([], {
+    //   minute: "2-digit",
+    // });
+    // const currentHour = date.toLocaleTimeString([], {
+    //   hour12: true,
+    //   hour: "2-digit",
+    // });
+    // const currentAmPm = date.toLocaleTimeString("en-US")?.substring(10, 12);
+
     let timeElapsed = 0;
-    if (oldMinute) {
-      timeElapsed = parseInt(currentMinute) - parseInt(oldMinute);
+    if (storedTime.oldMinute && storedTime.oldHour && storedTime.oldAmPM) {
+      calculateAmPm(storedTime, currentTime);
     }
-    console.log("current time: " + parseInt(currentMinute));
+
     console.log("time elapsed: ", timeElapsed);
   };
 
