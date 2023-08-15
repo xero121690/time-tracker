@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  //thinking of storing time with id and time to retrieve later using localstorage
+  //id can start at 0
+  //can use storeTime for it
   const [storeTime, setStoreTime] = useState("");
   const [time, setTime] = useState("");
   const date = new Date();
@@ -34,6 +37,8 @@ function App() {
     setStoreTime(time);
     //flip the value
     setButton(!isButton);
+    // after user
+    localStorage.setItem("userData", JSON.stringify(storeTime));
   };
 
   return (
@@ -51,6 +56,7 @@ function App() {
           </button>
         )}
         <p>Recorded time: {storeTime}</p>
+        <p>{localStorage.getItem("userData")}</p>
       </div>
     </>
   );
