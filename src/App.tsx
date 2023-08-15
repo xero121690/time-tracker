@@ -41,6 +41,22 @@ function App() {
     localStorage.setItem("userData", JSON.stringify(storeTime));
   };
 
+  const displayTime = () => {
+    //going to gather the time from first localstorage submission to present submission
+    //buton to show time elapsed in minutes
+    const oldMinute = localStorage.getItem("userData")?.substring(4, 6);
+
+    const currentMinute = date.toLocaleTimeString([], {
+      minute: "2-digit",
+    });
+    let timeElapsed = 0;
+    if (oldMinute) {
+      timeElapsed = parseInt(currentMinute) - parseInt(oldMinute);
+    }
+    console.log("current time: " + parseInt(currentMinute));
+    console.log("time elapsed: ", timeElapsed);
+  };
+
   return (
     <>
       <div className="grid text-center">
@@ -57,6 +73,9 @@ function App() {
         )}
         <p>Recorded time: {storeTime}</p>
         <p>{localStorage.getItem("userData")}</p>
+        <button className="btn btn-primary btn-lg" onClick={displayTime}>
+          Display Time Elapsed
+        </button>
       </div>
     </>
   );
