@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+type Time = {
+  [key: string]: string;
+};
+
+// NEED to change my way of storage -> thats the next step
+
 function App() {
   //thinking of storing time with id and time to retrieve later using localstorage
   //id can start at 0
@@ -32,6 +38,10 @@ function App() {
     };
   }, [time]);
 
+  useEffect(() => {
+    // localStorage.setItem("userData");
+  });
+
   const recordTime = () => {
     // using the same time in setInterval
     setStoreTime(time);
@@ -41,16 +51,24 @@ function App() {
     localStorage.setItem("userData", JSON.stringify(storeTime));
   };
 
-  const calculateAmPm = (oldAmPm, currentAmPm) => {
-    // within same morning /evening
-    if (oldAmPm == currentAmPm) {
-    }
+  //put time as the type, otherwise gives error
+  const calculateAmPm = (
+    { oldMinute, oldHour, oldAmPm }: Time,
+    { currentMinute, currentHour, currentAmPm }: Time
+  ) => {
+    console.log(oldAmPm, currentAmPm);
+    console.log("hours: ", oldHour, currentHour);
+    console.log("currentHour: ", currentHour);
 
+    if (oldAmPm == currentAmPm) {
+      const hourDifference = parseInt(oldHour) - parseInt(currentHour);
+
+      console.log("hourDifference: ", hourDifference);
+    }
     // going from morning to evening
     //
     if (oldAmPm == "AM" && currentAmPm == "PM") {
     }
-
     //going from evening to morning
     if (oldAmPm == "PM" && currentAmPm == "AM") {
     }
@@ -61,40 +79,29 @@ function App() {
     //buton to show time elapsed in minutes
 
     //stored time
-    const storedTime = {
-      oldMinute: localStorage.getItem("userData")?.substring(4, 6),
-      oldHour: localStorage.getItem("userDate")?.substring(1, 3),
-      oldAmPM: localStorage.getItem("userDate")?.substring(10, 12),
-    };
-    // const oldMinute = localStorage.getItem("userData")?.substring(4, 6);
-    // const oldHour = localStorage.getItem("userDate")?.substring(1, 3);
-    // const oldAmPM = localStorage.getItem("userDate")?.substring(10, 12);
+    const storedTime: Time = {};
+    storedTime.oldMinute =
+      localStorage.getItem("userData")?.substring(3, 5) || "0";
+
+    storedTime.oldHour =
+      localStorage.getItem("userData")?.substring(1, 2) || "0";
+
+    storedTime.oldAmPm =
+      localStorage.getItem("userData")?.substring(9, 11) || "";
 
     //current time
-    const currentTime = {
+    //doesn't need || because data is generated
+    const currentTime: Time = {
       currentMinute: date.toLocaleTimeString([], {
         minute: "2-digit",
       }),
-      currentHour: date.toLocaleTimeString([], {
-        hour12: true,
-        hour: "2-digit",
-      }),
+      currentHour: date.toLocaleTimeString().substring(0, 1),
       // "7:00:00 PM"
-      currentAmPm: date.toLocaleTimeString("en-US")?.substring(10, 12),
+      currentAmPm: date.toLocaleTimeString("en-US")?.substring(8, 11),
     };
-    // const currentMinute = date.toLocaleTimeString([], {
-    //   minute: "2-digit",
-    // });
-    // const currentHour = date.toLocaleTimeString([], {
-    //   hour12: true,
-    //   hour: "2-digit",
-    // });
-    // const currentAmPm = date.toLocaleTimeString("en-US")?.substring(10, 12);
 
     let timeElapsed = 0;
-    if (storedTime.oldMinute && storedTime.oldHour && storedTime.oldAmPM) {
-      calculateAmPm(storedTime, currentTime);
-    }
+    calculateAmPm(storedTime, currentTime);
 
     console.log("time elapsed: ", timeElapsed);
   };
@@ -102,6 +109,7 @@ function App() {
   return (
     <>
       <div className="grid text-center">
+        {/* Thursday, August 17, 2023 */}
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
         <h1>{time}</h1>
         {isButton ? (
