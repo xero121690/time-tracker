@@ -72,7 +72,11 @@ function App() {
 
     if (oldAmPm == currentAmPm) {
       //hour difference needs to be worked on, because the hour might have changed but doesnt mean 1 hour passed
+      // account for 12:00AM - 1:00AM
       let hourDifference = parseInt(currentHour) - parseInt(oldHour);
+      if (hourDifference < 0) {
+        hourDifference = 1;
+      }
       let minuteDifference = parseInt(currentMinute) - parseInt(oldMinute);
       if (oldMinute >= currentMinute) {
         //5:30 > 6:23
@@ -81,6 +85,8 @@ function App() {
           hourDifference = hourDifference - 1;
         }
       }
+      // account for 12:10AM - 1:10AM
+      // 1:00AM - 2:00AM
 
       // if (addedMinutes >= 60){
 
