@@ -5,7 +5,16 @@ type Time = {
   [key: string]: string;
 };
 
-// NEED to change my way of storage -> thats the next step
+type Person = {
+  id: number;
+  time: string;
+};
+
+// assuming user logged in already
+// start and stop, display time
+// 1 day only - time
+// --> going to use storedTime, currenttime, and ID
+// future feature add date to add multiple day time
 
 function App() {
   //thinking of storing time with id and time to retrieve later using localstorage
@@ -38,17 +47,20 @@ function App() {
     };
   }, [time]);
 
-  useEffect(() => {
-    // localStorage.setItem("userData");
-  });
+  // useEffect(() => {
+  //   // localStorage.setItem("userData");
+  // });
 
   const recordTime = () => {
     // using the same time in setInterval
+    //here you add the whole object
+
     setStoreTime(time);
-    //flip the value
-    setButton(!isButton);
     // after user
     localStorage.setItem("userData", JSON.stringify(storeTime));
+
+    //flip the value
+    setButton(!isButton);
   };
 
   //put time as the type, otherwise gives error
@@ -57,13 +69,27 @@ function App() {
     { currentMinute, currentHour, currentAmPm }: Time
   ) => {
     console.log(oldAmPm, currentAmPm);
-    console.log("hours: ", oldHour, currentHour);
-    console.log("currentHour: ", currentHour);
 
     if (oldAmPm == currentAmPm) {
-      const hourDifference = parseInt(oldHour) - parseInt(currentHour);
+      //hour difference needs to be worked on, because the hour might have changed but doesnt mean 1 hour passed
+      let hourDifference = parseInt(currentHour) - parseInt(oldHour);
+      let minuteDifference = parseInt(currentMinute) - parseInt(oldMinute);
+      if (oldMinute >= currentMinute) {
+        //5:30 > 6:23
+        minuteDifference = parseInt(currentMinute) + parseInt(oldMinute);
+        if (minuteDifference < 60) {
+          hourDifference = hourDifference - 1;
+        }
+      }
+
+      // if (addedMinutes >= 60){
+
+      //   addedHours = addedHours + parseInt(addedMinutes/60);
+      //   addedMinutes = parseInt(addedMinutes%60);
+      // }
 
       console.log("hourDifference: ", hourDifference);
+      console.log("minuteDifference: ", minuteDifference);
     }
     // going from morning to evening
     //
@@ -106,11 +132,17 @@ function App() {
     console.log("time elapsed: ", timeElapsed);
   };
 
+  const clearPage = () => {
+    location.reload();
+    localStorage.clear();
+  };
+
   return (
     <>
       <div className="grid text-center">
         {/* Thursday, August 17, 2023 */}
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
+        {/* displays only when you hit sto  */}
         <h1>{time}</h1>
         {isButton ? (
           <button className="btn btn-primary btn-lg" onClick={recordTime}>
@@ -122,10 +154,17 @@ function App() {
           </button>
         )}
         <p>Recorded time: {storeTime}</p>
-        <p>{localStorage.getItem("userData")}</p>
+        {/* displays recorded time only after you press stop */}
+        {isButton && <p>{localStorage.getItem("userData")}</p>}
         <button className="btn btn-primary btn-lg" onClick={displayTime}>
           Display Time Elapsed
         </button>
+        <p></p>
+        <div>
+          <button className="btn btn-primary btn-lg" onClick={clearPage}>
+            Clear Page
+          </button>
+        </div>
       </div>
     </>
   );
