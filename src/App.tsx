@@ -70,19 +70,27 @@ function App() {
   ) => {
     console.log(oldAmPm, currentAmPm);
 
+    // works for am = am | pm = pm
     if (oldAmPm == currentAmPm) {
       //hour difference needs to be worked on, because the hour might have changed but doesnt mean 1 hour passed
       // account for 12:00AM - 1:00AM
       let hourDifference = parseInt(currentHour) - parseInt(oldHour);
+      // if hourDifference is negative meaning 1 - 12 = -11
       if (hourDifference < 0) {
         hourDifference = 1;
       }
+      // minute difference; 10 - 25 = -15 --> maybe i can do evalaute all numbers to positive
       let minuteDifference = parseInt(currentMinute) - parseInt(oldMinute);
-      if (oldMinute >= currentMinute) {
+      if (oldMinute > currentMinute) {
         //5:30 > 6:23
-        minuteDifference = parseInt(currentMinute) + parseInt(oldMinute);
+        minuteDifference = 60 - parseInt(currentMinute) + parseInt(oldMinute);
+        //5:30 > 6:23
         if (minuteDifference < 60) {
           hourDifference = hourDifference - 1;
+          // 5:10 > 6:25
+        } else if (minuteDifference > 60) {
+          //modulus the 1 hour is carried from atop, this is just for minutes left over
+          minuteDifference = minuteDifference % 60;
         }
       }
       // account for 12:10AM - 1:10AM
