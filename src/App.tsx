@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import "./App.css";
 import axios from "axios";
 
@@ -15,7 +15,9 @@ function App() {
   const seconds = 1;
 
   //buttons
-  const [isButton, setButton] = useState(true);
+  // const [isButton, setButton] = useState(true);
+  const [startButton, setStartButton] = useState(true);
+  const [stopButton, setStopButton] = useState(false);
 
   // explicitly set options to object because toLocaleDateString would say there is an overload
   const options: object = {
@@ -27,16 +29,17 @@ function App() {
 
   // running this first before i start anything else
   //going to check whether api start is running already; only once on refresh
-  useEffect(() => {
+  useLayoutEffect(() => {
     const urlStartTimer = "http://127.0.0.1:3000/onrefresh";
     axios
       .get(urlStartTimer)
       .then(function (response) {
         // handle success
         //response.data - only data from response, without it, you receive headers
-        console.log(JSON.stringify(response.data));
+        console.log(response.data);
         if (response.data) {
-          setButton(true);
+          setStopButton(true);
+          setStartButton(false);
         }
       })
       .catch(function (error) {
@@ -66,7 +69,8 @@ function App() {
 
   const stopTime = () => {
     //flip the value
-    setButton(!isButton);
+    setStartButton(true);
+    setStopButton(false);
 
     //making a request
 
@@ -99,7 +103,8 @@ function App() {
     localStorage.setItem("userData", JSON.stringify(storeTime));
 
     //flip the value
-    setButton(!isButton);
+    setStartButton(false);
+    setStopButton(true);
 
     //making a request
 
@@ -144,8 +149,49 @@ function App() {
   };
 
   const clearPage = () => {
+    // this clears out the local state on refresh
     location.reload();
-    localStorage.clear();
+    // localStorage.clear();
+  };
+
+  const calculateTime = () => {
+    const urlStartTimer = "http://127.0.0.1:3000/retrieve";
+    axios
+      .get(urlStartTimer)
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+        console.log("inside calculateTime");
+        addSeconds(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+        console.log("finally");
+      });
+    // if (addedMinutes >= 60){
+    //   addedHours = addedHours + parseInt(addedMinutes/60);
+    //   addedMinutes = parseInt(addedMinutes%60);
+    // }
+  };
+
+  const addSeconds = (seconds: number) => {
+    let addedMinutes = Math.floor(seconds / 60);
+    let addedHours = 0;
+    if (addedMinutes >= 60) {
+      addedHours = addedHours + addedMinutes / 60;
+      addedMinutes = addedMinutes % 60;
+    }
+
+    setDisplaySeconds(JSON.stringify(`Minutes: ${addedMinutes}`));
+
+    console.log("added seconds: ", seconds);
+
+    console.log("added minutes: ", addedMinutes);
+    console.log("added hours: ", addedHours);
   };
 
   return (
@@ -155,7 +201,7 @@ function App() {
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
         {/* displays only when you hit sto  */}
         <h1>{time}</h1>
-        {isButton ? (
+        {startButton ? (
           <button className="btn btn-primary btn-lg" onClick={recordTime}>
             Start
           </button>
@@ -170,8 +216,8 @@ function App() {
 
         <button
           className="btn btn-primary btn-lg"
-          disabled={isButton}
-          onClick={displayTime}
+          disabled={!stopButton}
+          onClick={calculateTime}
         >
           Display Time Elapsed
         </button>
@@ -180,6 +226,13 @@ function App() {
         <div>
           <button className="btn btn-primary btn-lg" onClick={clearPage}>
             Clear Page
+          </button>
+        </div>
+        <p></p>
+
+        <div>
+          <button className="btn btn-primary btn-lg" onClick={calculateTime}>
+            Calculate Time
           </button>
         </div>
       </div>
