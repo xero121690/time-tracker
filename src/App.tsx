@@ -1,20 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
-type Time = {
-  [key: string]: string;
-};
-
-type Person = {
-  id: number;
-  time: string;
-};
-
-// assuming user logged in already
-// start and stop, display time
-// 1 day only - time
-// --> going to use storedTime, currenttime, and ID
-// future feature add date to add multiple day time
+import axios from "axios";
 
 function App() {
   //thinking of storing time with id and time to retrieve later using localstorage
@@ -23,6 +9,9 @@ function App() {
   const [storeTime, setStoreTime] = useState("");
   const [time, setTime] = useState("");
   const date = new Date();
+  const [displaySeconds, setDisplaySeconds] = useState("");
+  // const [minutes, setMinutes] = useState(parseInt("0"));
+  // const [realMinutes, setRealMinutes] = useState(parseInt("0"));
   const seconds = 1;
 
   //buttons
@@ -41,19 +30,42 @@ function App() {
   useEffect(() => {
     const tmpTime = setInterval(() => {
       setTime(date.toLocaleTimeString());
+      // setMinutes(minutes + 1);
     }, seconds * 1000);
+
     return () => {
       clearInterval(tmpTime);
     };
   }, [time]);
 
-  // useEffect(() => {
-  //   // localStorage.setItem("userData");
-  // });
+  const stopTime = () => {
+    //flip the value
+    setButton(!isButton);
+
+    //making a request
+
+    const urlStartTimer = "http://127.0.0.1:3000/stop";
+    axios
+      .get(urlStartTimer)
+      .then(function (response) {
+        // handle success
+        console.log(JSON.stringify(response.data));
+        setDisplaySeconds(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+        console.log("finally");
+      });
+  };
 
   const recordTime = () => {
     // using the same time in setInterval
     //here you add the whole object
+    //run seconds on the back end, and only when user decides to stop does it provide the seconds/minutes elapsed
 
     setStoreTime(time);
     // after user
@@ -61,89 +73,47 @@ function App() {
 
     //flip the value
     setButton(!isButton);
-  };
 
-  //put time as the type, otherwise gives error
-  const calculateAmPm = (
-    { oldMinute, oldHour, oldAmPm }: Time,
-    { currentMinute, currentHour, currentAmPm }: Time
-  ) => {
-    console.log(oldAmPm, currentAmPm);
+    //making a request
 
-    // works for am = am | pm = pm
-    if (oldAmPm == currentAmPm) {
-      //hour difference needs to be worked on, because the hour might have changed but doesnt mean 1 hour passed
-      // account for 12:00AM - 1:00AM
-      let hourDifference = parseInt(currentHour) - parseInt(oldHour);
-      // if hourDifference is negative meaning 1 - 12 = -11
-      if (hourDifference < 0) {
-        hourDifference = 1;
-      }
-      // minute difference; 10 - 25 = -15 --> maybe i can do evalaute all numbers to positive
-      let minuteDifference = parseInt(currentMinute) - parseInt(oldMinute);
-      if (oldMinute > currentMinute) {
-        //5:30 > 6:23
-        minuteDifference = 60 - parseInt(currentMinute) + parseInt(oldMinute);
-        //5:30 > 6:23
-        if (minuteDifference < 60) {
-          hourDifference = hourDifference - 1;
-          // 5:10 > 6:25
-        } else if (minuteDifference > 60) {
-          //modulus the 1 hour is carried from atop, this is just for minutes left over
-          minuteDifference = minuteDifference % 60;
-        }
-      }
-      // account for 12:10AM - 1:10AM
-      // 1:00AM - 2:00AM
-
-      // if (addedMinutes >= 60){
-
-      //   addedHours = addedHours + parseInt(addedMinutes/60);
-      //   addedMinutes = parseInt(addedMinutes%60);
-      // }
-
-      console.log("hourDifference: ", hourDifference);
-      console.log("minuteDifference: ", minuteDifference);
-    }
-    // going from morning to evening
-    //
-    if (oldAmPm == "AM" && currentAmPm == "PM") {
-    }
-    //going from evening to morning
-    if (oldAmPm == "PM" && currentAmPm == "AM") {
-    }
+    const urlStartTimer = "http://127.0.0.1:3000/start";
+    axios
+      .get(urlStartTimer)
+      .then(function (response) {
+        // handle success
+        console.log(JSON.stringify(response.data));
+        setDisplaySeconds(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+        console.log("finally");
+      });
   };
 
   const displayTime = () => {
+    const urlStartTimer = "http://127.0.0.1:3000/retrieve";
+    axios
+      .get(urlStartTimer)
+      .then(function (response) {
+        // handle success
+        console.log(JSON.stringify(response.data));
+        setDisplaySeconds(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+        console.log("finally");
+      });
+
     //going to gather the time from first localstorage submission to present submission
     //buton to show time elapsed in minutes
-
-    //stored time
-    const storedTime: Time = {};
-    storedTime.oldMinute =
-      localStorage.getItem("userData")?.substring(3, 5) || "0";
-
-    storedTime.oldHour =
-      localStorage.getItem("userData")?.substring(1, 2) || "0";
-
-    storedTime.oldAmPm =
-      localStorage.getItem("userData")?.substring(9, 11) || "";
-
-    //current time
-    //doesn't need || because data is generated
-    const currentTime: Time = {
-      currentMinute: date.toLocaleTimeString([], {
-        minute: "2-digit",
-      }),
-      currentHour: date.toLocaleTimeString().substring(0, 1),
-      // "7:00:00 PM"
-      currentAmPm: date.toLocaleTimeString("en-US")?.substring(8, 11),
-    };
-
-    let timeElapsed = 0;
-    calculateAmPm(storedTime, currentTime);
-
-    console.log("time elapsed: ", timeElapsed);
   };
 
   const clearPage = () => {
@@ -163,16 +133,18 @@ function App() {
             Start
           </button>
         ) : (
-          <button className="btn btn-primary btn-lg" onClick={recordTime}>
+          <button className="btn btn-primary btn-lg" onClick={stopTime}>
             Stop
           </button>
         )}
         <p>Recorded time: {storeTime}</p>
         {/* displays recorded time only after you press stop */}
-        {isButton && <p>{localStorage.getItem("userData")}</p>}
+        <p>{displaySeconds}</p>
+
         <button className="btn btn-primary btn-lg" onClick={displayTime}>
           Display Time Elapsed
         </button>
+
         <p></p>
         <div>
           <button className="btn btn-primary btn-lg" onClick={clearPage}>
