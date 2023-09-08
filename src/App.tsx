@@ -25,6 +25,32 @@ function App() {
     day: "numeric",
   };
 
+  // running this first before i start anything else
+  //going to check whether api start is running already; only once on refresh
+  useEffect(() => {
+    const urlStartTimer = "http://127.0.0.1:3000/onrefresh";
+    axios
+      .get(urlStartTimer)
+      .then(function (response) {
+        // handle success
+        //response.data - only data from response, without it, you receive headers
+        console.log(JSON.stringify(response.data));
+        if (response.data) {
+          setButton(true);
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+        console.log("finally");
+      });
+
+    // return () => {};
+  }, []);
+
   // setInterval creates a new interval every time component renders, which causes it to render again and you end up with an inifinite loop
   //useEffect to mount and unmount
   useEffect(() => {
@@ -49,6 +75,7 @@ function App() {
       .get(urlStartTimer)
       .then(function (response) {
         // handle success
+        //response.data - only data from response, without it, you receive headers
         console.log(JSON.stringify(response.data));
         setDisplaySeconds(JSON.stringify(response.data));
       })
@@ -141,7 +168,11 @@ function App() {
         {/* displays recorded time only after you press stop */}
         <p>{displaySeconds}</p>
 
-        <button className="btn btn-primary btn-lg" onClick={displayTime}>
+        <button
+          className="btn btn-primary btn-lg"
+          disabled={isButton}
+          onClick={displayTime}
+        >
           Display Time Elapsed
         </button>
 
