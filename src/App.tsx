@@ -126,28 +126,6 @@ function App() {
       });
   };
 
-  const displayTime = () => {
-    const urlStartTimer = "http://127.0.0.1:3000/retrieve";
-    axios
-      .get(urlStartTimer)
-      .then(function (response) {
-        // handle success
-        console.log(JSON.stringify(response.data));
-        setDisplaySeconds(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(function () {
-        // always executed
-        console.log("finally");
-      });
-
-    //going to gather the time from first localstorage submission to present submission
-    //buton to show time elapsed in minutes
-  };
-
   const clearPage = () => {
     // this clears out the local state on refresh
     location.reload();
@@ -226,13 +204,6 @@ function App() {
         <div>
           <button className="btn btn-primary btn-lg" onClick={clearPage}>
             Clear Page
-          </button>
-        </div>
-        <p></p>
-
-        <div>
-          <button className="btn btn-primary btn-lg" onClick={calculateTime}>
-            Calculate Time
           </button>
         </div>
       </div>
