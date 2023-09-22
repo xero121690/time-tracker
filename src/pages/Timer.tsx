@@ -1,15 +1,9 @@
 import { useEffect, useState, useLayoutEffect } from "react";
-import "./App.css";
+import "../App.css";
 import axios from "axios";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function App() {
+function Timer() {
   //thinking of storing time with id and time to retrieve later using localstorage
   //id can start at 0
   //can use storeTime for it
@@ -133,12 +127,6 @@ function App() {
       });
   };
 
-  const clearPage = () => {
-    // this clears out the local state on refresh
-    location.reload();
-    // localStorage.clear();
-  };
-
   const calculateTime = () => {
     const urlStartTimer = "http://127.0.0.1:3000/retrieve";
     axios
@@ -181,43 +169,43 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <div className="grid text-center">
-          {/* Thursday, August 17, 2023 */}
-          <h1>{date.toLocaleDateString("en-US", options)}</h1>
-          {/* displays only when you hit sto  */}
-          <h1>{time}</h1>
-          {startButton ? (
-            <button className="btn btn-primary btn-lg" onClick={recordTime}>
-              Start
-            </button>
-          ) : (
-            <button className="btn btn-primary btn-lg" onClick={stopTime}>
-              Stop
-            </button>
-          )}
-          <p>Recorded time: {storeTime}</p>
-          {/* displays recorded time only after you press stop */}
-          <p>{displaySeconds}</p>
-
-          <button
-            className="btn btn-primary btn-lg"
-            disabled={!stopButton}
-            onClick={calculateTime}
-          >
-            Display Time Elapsed
+      <div className="grid text-center">
+        {/* Thursday, August 17, 2023 */}
+        <h1>{date.toLocaleDateString("en-US", options)}</h1>
+        {/* displays only when you hit sto  */}
+        <h1>{time}</h1>
+        {startButton ? (
+          <button className="btn btn-primary btn-lg" onClick={recordTime}>
+            Start
           </button>
+        ) : (
+          <button className="btn btn-primary btn-lg" onClick={stopTime}>
+            Stop
+          </button>
+        )}
+        <p>Recorded time: {storeTime}</p>
+        {/* displays recorded time only after you press stop */}
+        <p>{displaySeconds}</p>
 
-          <p></p>
-          <div>
-            <button className="btn btn-primary btn-lg" onClick={clearPage}>
-              Clear Page
-            </button>
-          </div>
+        <button
+          className="btn btn-primary btn-lg"
+          disabled={!stopButton}
+          onClick={calculateTime}
+        >
+          Display Time Elapsed
+        </button>
+
+        <p></p>
+        <div>
+          <button className="history">
+            <Link className="btn btn-primary btn-lg" to={"/history"}>
+              History
+            </Link>
+          </button>
         </div>
-      </BrowserRouter>
+      </div>
     </>
   );
 }
 
-export default App;
+export default Timer;
