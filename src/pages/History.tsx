@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../App.css";
 // import { Link } from "react-router-dom";
 
 const History = () => {
@@ -35,13 +36,14 @@ const History = () => {
 
   return (
     <div>
-      <h1>Book Shop</h1>
-      <h2>{JSON.stringify(history)}</h2>
-      <div className="books">
+      <h1 className="historyh1">History</h1>
+      {/* <h2>{JSON.stringify(history)}</h2> */}
+      <div className="History">
         {history.map((data: data) => (
           <div className="time" key={data.DataID}>
-            <h2>{data.seconds}</h2>
-            <p>{data.date}</p>
+            <h2 className="date">{data.date}</h2>
+            <h3 className="seconds">{data.seconds}</h3>
+
             {/* <button className="delete" onClick={() => handleDelete(book.id)}>
               Delete
             </button>
