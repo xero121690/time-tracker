@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../App.css";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const History = () => {
   type data = {
@@ -34,6 +34,13 @@ const History = () => {
     // return () => {};
   }, []);
 
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete("http://127.0.0.1:3000/history/" + id);
+      window.location.reload();
+    } catch (err) {}
+  };
+
   return (
     <div>
       <h1 className="historyh1">History</h1>
@@ -44,12 +51,15 @@ const History = () => {
             <h2 className="date">{data.date}</h2>
             <h3 className="seconds">{data.seconds}</h3>
 
-            {/* <button className="delete" onClick={() => handleDelete(book.id)}>
+            <button
+              className="delete"
+              onClick={() => handleDelete(data.DataID)}
+            >
               Delete
             </button>
             <button className="update">
-              <Link to={`/update/${book.id}`}>Update</Link>
-            </button> */}
+              <Link to={`/update/${data.DataID}`}>Update</Link>
+            </button>
           </div>
         ))}
       </div>
