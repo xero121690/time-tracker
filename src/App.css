@@ -39,3 +39,18 @@
     align-items: center;
 }
 
+
+.transparent {
+    background-color: white;
+    border: none;
+   
+}
+
+.homeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* moves the div higher to be underneath dates */
+    transform: translateY(-300px);
+}

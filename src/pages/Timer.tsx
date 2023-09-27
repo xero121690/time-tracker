@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState, useLayoutEffect, useRef } from "react";
 import "../App.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -8,12 +8,15 @@ function Timer() {
   //id can start at 0
   //can use storeTime for it
   const [storeTime, setStoreTime] = useState("");
-  const [time, setTime] = useState("");
   const date = new Date();
+  const [time, setTime] = useState("");
   const [displaySeconds, setDisplaySeconds] = useState("");
   // const [minutes, setMinutes] = useState(parseInt("0"));
   // const [realMinutes, setRealMinutes] = useState(parseInt("0"));
   const seconds = 1;
+
+  //first run
+  const firstUpdate = useRef(true);
 
   //buttons
   // const [isButton, setButton] = useState(true);
@@ -57,7 +60,7 @@ function Timer() {
 
   // setInterval creates a new interval every time component renders, which causes it to render again and you end up with an inifinite loop
   //useEffect to mount and unmount
-  useEffect(() => {
+  useLayoutEffect(() => {
     const tmpTime = setInterval(() => {
       setTime(date.toLocaleTimeString());
       // setMinutes(minutes + 1);
@@ -167,13 +170,18 @@ function Timer() {
     console.log("added hours: ", addedHours);
   };
 
+  const initialTime = () => {
+    firstUpdate.current = false;
+    return date.toLocaleTimeString();
+  };
+
   return (
     <>
       <div className="grid text-center">
         {/* Thursday, August 17, 2023 */}
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
         {/* displays only when you hit sto  */}
-        <h1>{time}</h1>
+        <h1>{firstUpdate.current ? initialTime() : time}</h1>
         {startButton ? (
           <button className="btn btn-primary btn-lg" onClick={recordTime}>
             Start

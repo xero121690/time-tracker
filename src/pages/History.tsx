@@ -63,6 +63,13 @@ const History = () => {
           </div>
         ))}
       </div>
+      <div className="homeButton">
+        <button className="transparent">
+          <Link className="btn btn-primary btn-lg" to={"/"}>
+            Home
+          </Link>
+        </button>
+      </div>
     </div>
   );
 };
