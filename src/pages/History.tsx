@@ -24,11 +24,10 @@ const History = () => {
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        return error;
       })
       .finally(function () {
         // always executed
-        console.log("finally");
       });
 
     // return () => {};
@@ -38,7 +37,26 @@ const History = () => {
     try {
       await axios.delete("http://127.0.0.1:3000/history/" + id);
       window.location.reload();
-    } catch (err) {}
+    } catch (err) {
+      return err;
+    }
+  };
+
+  const addSeconds = (seconds: number) => {
+    let addedMinutes = Math.floor(seconds / 60);
+    let addedHours = 0;
+    if (addedMinutes >= 60) {
+      addedHours = addedHours + addedMinutes / 60;
+      addedMinutes = addedMinutes % 60;
+    }
+
+    let testString = JSON.stringify(`Minutes: ${addedMinutes}`);
+
+    console.log("added seconds: ", seconds);
+
+    console.log("added minutes: ", addedMinutes);
+    console.log("added hours: ", addedHours);
+    return testString;
   };
 
   return (
@@ -50,15 +68,21 @@ const History = () => {
           <div className="time" key={data.DataID}>
             <h2 className="date">{data.date}</h2>
             <h3 className="seconds">{data.seconds}</h3>
+            <h3 className="minutes">{addSeconds(data.seconds)}</h3>
 
             <button
-              className="delete"
+              className="btn btn-primary btn-sm"
               onClick={() => handleDelete(data.DataID)}
             >
               Delete
             </button>
-            <button className="update">
-              <Link to={`/update/${data.DataID}`}>Update</Link>
+            <button className="transparent">
+              <Link
+                className="btn btn-primary btn-sm"
+                to={`/update/${data.DataID}`}
+              >
+                Update
+              </Link>
             </button>
           </div>
         ))}

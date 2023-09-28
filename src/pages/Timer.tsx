@@ -34,6 +34,8 @@ function Timer() {
   // running this first before i start anything else
   //going to check whether api start is running already; only once on refresh
   useLayoutEffect(() => {
+    // const controller = new AbortController();
+    // const signal = controller.signal;
     const urlStartTimer = "http://127.0.0.1:3000/onrefresh";
     axios
       .get(urlStartTimer)
@@ -44,18 +46,29 @@ function Timer() {
         if (response.data) {
           setStopButton(true);
           setStartButton(false);
+          const runningTimer = localStorage.getItem("userData");
+
+          if (runningTimer) {
+            const parsedRunningTimer = JSON.parse(runningTimer);
+            console.log(parsedRunningTimer);
+            setStoreTime(parsedRunningTimer);
+          }
         }
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        if (error.name === "AbortError") {
+          console.log("Cancelled!");
+        }
       })
       .finally(function () {
         // always executed
         console.log("finally");
       });
 
-    // return () => {};
+    return () => {
+      // controller.abort();
+    };
   }, []);
 
   // setInterval creates a new interval every time component renders, which causes it to render again and you end up with an inifinite loop
@@ -66,7 +79,9 @@ function Timer() {
       // setMinutes(minutes + 1);
     }, seconds * 1000);
 
+    //this is a clean up function,
     return () => {
+      //clear something from previous effect
       clearInterval(tmpTime);
     };
   }, [time]);
@@ -84,16 +99,14 @@ function Timer() {
       .then(function (response) {
         // handle success
         //response.data - only data from response, without it, you receive headers
-        console.log(JSON.stringify(response.data));
         setDisplaySeconds(JSON.stringify(response.data));
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        return error;
       })
       .finally(function () {
         // always executed
-        console.log("finally");
       });
   };
 
@@ -104,7 +117,7 @@ function Timer() {
 
     setStoreTime(time);
     // after user
-    localStorage.setItem("userData", JSON.stringify(storeTime));
+    localStorage.setItem("userData", JSON.stringify(time));
 
     //flip the value
     setStartButton(false);
@@ -117,16 +130,14 @@ function Timer() {
       .get(urlStartTimer)
       .then(function (response) {
         // handle success
-        console.log(JSON.stringify(response.data));
         setDisplaySeconds(JSON.stringify(response.data));
       })
       .catch(function (error) {
         // handle error
-        console.log(error.code);
+        return error;
       })
       .finally(function () {
         // always executed
-        console.log("finally");
       });
   };
 
@@ -146,7 +157,6 @@ function Timer() {
       })
       .finally(function () {
         // always executed
-        console.log("finally");
       });
     // if (addedMinutes >= 60){
     //   addedHours = addedHours + parseInt(addedMinutes/60);
@@ -170,18 +180,14 @@ function Timer() {
     console.log("added hours: ", addedHours);
   };
 
-  const initialTime = () => {
-    firstUpdate.current = false;
-    return date.toLocaleTimeString();
-  };
-
   return (
     <>
       <div className="grid text-center">
         {/* Thursday, August 17, 2023 */}
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
-        {/* displays only when you hit sto  */}
-        <h1>{firstUpdate.current ? initialTime() : time}</h1>
+        {/* ??????????????????? */}
+        <h1>{firstUpdate.current ? date.toLocaleTimeString() : "time"}</h1>
+        <h1>{JSON.stringify(firstUpdate.current)}</h1>
         {startButton ? (
           <button className="btn btn-primary btn-lg" onClick={recordTime}>
             Start
@@ -191,17 +197,19 @@ function Timer() {
             Stop
           </button>
         )}
-        <p>Recorded time: {storeTime}</p>
+        <p>Start time:</p>
+        <p>{storeTime}</p>
         {/* displays recorded time only after you press stop */}
         <p>{displaySeconds}</p>
 
-        <button
+        {/* this display time but not really used */}
+        {/* <button
           className="btn btn-primary btn-lg"
           disabled={!stopButton}
           onClick={calculateTime}
         >
           Display Time Elapsed
-        </button>
+        </button> */}
 
         <p></p>
         <div>
