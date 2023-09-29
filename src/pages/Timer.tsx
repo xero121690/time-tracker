@@ -8,8 +8,10 @@ function Timer() {
   //id can start at 0
   //can use storeTime for it
   const [storeTime, setStoreTime] = useState("");
+  // date is used for date Thursday, September 28, 2023 h1 tag with en-us options
   const date = new Date();
-  const [time, setTime] = useState("");
+  // need to use new Date() here for initial date view and then useeffect for after 1 second
+  const [time, setTime] = useState(new Date());
   const [displaySeconds, setDisplaySeconds] = useState("");
   // const [minutes, setMinutes] = useState(parseInt("0"));
   // const [realMinutes, setRealMinutes] = useState(parseInt("0"));
@@ -33,7 +35,7 @@ function Timer() {
 
   // running this first before i start anything else
   //going to check whether api start is running already; only once on refresh
-  useLayoutEffect(() => {
+  useEffect(() => {
     // const controller = new AbortController();
     // const signal = controller.signal;
     const urlStartTimer = "http://127.0.0.1:3000/onrefresh";
@@ -73,9 +75,9 @@ function Timer() {
 
   // setInterval creates a new interval every time component renders, which causes it to render again and you end up with an inifinite loop
   //useEffect to mount and unmount
-  useLayoutEffect(() => {
+  useEffect(() => {
     const tmpTime = setInterval(() => {
-      setTime(date.toLocaleTimeString());
+      setTime(new Date());
       // setMinutes(minutes + 1);
     }, seconds * 1000);
 
@@ -115,9 +117,9 @@ function Timer() {
     //here you add the whole object
     //run seconds on the back end, and only when user decides to stop does it provide the seconds/minutes elapsed
 
-    setStoreTime(time);
+    setStoreTime(time.toLocaleTimeString());
     // after user
-    localStorage.setItem("userData", JSON.stringify(time));
+    localStorage.setItem("userData", JSON.stringify(time.toLocaleTimeString()));
 
     //flip the value
     setStartButton(false);
@@ -186,8 +188,9 @@ function Timer() {
         {/* Thursday, August 17, 2023 */}
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
         {/* ??????????????????? */}
-        <h1>{firstUpdate.current ? date.toLocaleTimeString() : "time"}</h1>
-        <h1>{JSON.stringify(firstUpdate.current)}</h1>
+        <h1>{time.toLocaleTimeString()}</h1>
+        {/* <h1>{firstUpdate.current ? date.toLocaleTimeString() : "time"}</h1> */}
+        {/* <h1>{JSON.stringify(firstUpdate.current)}</h1> */}
         {startButton ? (
           <button className="btn btn-primary btn-lg" onClick={recordTime}>
             Start
