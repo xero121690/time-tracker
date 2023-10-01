@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../App.css";
+
 import { Link } from "react-router-dom";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const History = () => {
   type data = {
@@ -17,18 +19,12 @@ const History = () => {
     axios
       .get(urlStartTimer)
       .then(function (response) {
-        // handle success
-        //response.data - only data from response, without it, you receive headers
-        console.log(response.data);
         setHistory(() => response.data);
       })
       .catch(function (error) {
-        // handle error
         return error;
       })
-      .finally(function () {
-        // always executed
-      });
+      .finally(function () {});
 
     // return () => {};
   }, []);
@@ -50,45 +46,59 @@ const History = () => {
       addedMinutes = addedMinutes % 60;
     }
 
-    let testString = JSON.stringify(`Minutes: ${addedMinutes}`);
-
-    console.log("added seconds: ", seconds);
-
-    console.log("added minutes: ", addedMinutes);
-    console.log("added hours: ", addedHours);
+    const testString = `Hours: ${addedHours} Minutes: ${addedMinutes}`;
     return testString;
   };
 
-  return (
-    <div>
-      <h1 className="historyh1">History</h1>
-      {/* <h2>{JSON.stringify(history)}</h2> */}
-      <div className="History">
-        {history.map((data: data) => (
-          <div className="time" key={data.DataID}>
-            <h2 className="date">{data.date}</h2>
-            <h3 className="seconds">{data.seconds}</h3>
-            <h3 className="minutes">{addSeconds(data.seconds)}</h3>
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 9,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 7,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 5,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 3,
+    },
+  };
 
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={() => handleDelete(data.DataID)}
-            >
-              Delete
-            </button>
-            <button className="transparent">
-              <Link
-                className="btn btn-primary btn-sm"
-                to={`/update/${data.DataID}`}
-              >
-                Update
-              </Link>
-            </button>
-          </div>
-        ))}
+  const htmlDisplay = history.map((data: data) => (
+    <div className="card" key={data.DataID}>
+      {/* card */}
+      <div className="date">
+        <h2>{data.date}</h2>
+        <h3 className="minutes">{addSeconds(data.seconds)}</h3>
       </div>
+      <div>
+        <button type="button">
+          <Link className="btn btn-outline-light" to={`/update/${data.DataID}`}>
+            Update
+          </Link>
+        </button>
+      </div>
+      <div>
+        <button type="button" onClick={() => handleDelete(data.DataID)}>
+          <a className="btn btn-outline-danger">Delete</a>
+        </button>
+      </div>
+    </div>
+  ));
+
+  return (
+    <div className="main">
+      <h1>History</h1>
+      <Carousel responsive={responsive}>{htmlDisplay}</Carousel>
       <div className="homeButton">
-        <button className="transparent">
+        <p></p>
+        <button type="button">
           <Link className="btn btn-primary btn-lg" to={"/"}>
             Home
           </Link>
