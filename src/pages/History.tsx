@@ -46,45 +46,44 @@ const History = () => {
       addedMinutes = addedMinutes % 60;
     }
 
-    const testString = `Hours: ${addedHours} Minutes: ${addedMinutes}`;
+    const testString = `${addedHours}:${addedMinutes}`;
     return testString;
   };
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 9,
+      breakpoint: { max: 4000, min: 1024 },
+      items: 5,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 7,
+      breakpoint: { max: 1024, min: 800 },
+      items: 4,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 5,
+      breakpoint: { max: 800, min: 464 },
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 3,
+      items: 1,
     },
   };
 
   const htmlDisplay = history.map((data: data) => (
     <div className="card" key={data.DataID}>
       {/* card */}
-      <div className="date">
-        <h2>{data.date}</h2>
-        <h3 className="minutes">{addSeconds(data.seconds)}</h3>
+      <div className="datetime">
+        <h2 className="date">{data.date}</h2>
+        <h3 className="time">{addSeconds(data.seconds)}</h3>
       </div>
-      <div>
-        <button type="button">
+      <div className="update">
+        <button type="button" className="button">
           <Link className="btn btn-outline-light" to={`/update/${data.DataID}`}>
             Update
           </Link>
         </button>
       </div>
-      <div>
+      <div className="delete">
         <button type="button" onClick={() => handleDelete(data.DataID)}>
           <a className="btn btn-outline-danger">Delete</a>
         </button>
@@ -94,7 +93,7 @@ const History = () => {
 
   return (
     <div className="main">
-      <h1>History</h1>
+      <h1 className="history">History</h1>
       <Carousel responsive={responsive}>{htmlDisplay}</Carousel>
       <div className="homeButton">
         <p></p>
