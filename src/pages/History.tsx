@@ -84,7 +84,11 @@ const History = () => {
         </button>
       </div>
       <div className="delete">
-        <button type="button" onClick={() => handleDelete(data.DataID)}>
+        <button
+          type="button"
+          className="button"
+          onClick={() => handleDelete(data.DataID)}
+        >
           <a className="btn btn-outline-danger">Delete</a>
         </button>
       </div>
