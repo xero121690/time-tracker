@@ -37,9 +37,10 @@ div button {
 
 /* border */
 div.card {
-    box-shadow: 0 4px 8px 0 rgb(62,62,62); 
-    max-width: 240px;
-    margin: auto 1rem;
+    /* box-shadow: 0 4px 8px 0 rgb(62,62,62);  */
+    max-width: 350px;
+    /* 0.5rem margin dealing with width of the card */
+    margin: 1rem 0.35rem;
     text-align: center;
     background-color: rgb(21,21,21);
   }
@@ -57,8 +58,8 @@ div.card {
 .date {
   display: flex;
   /* flex-direction column allows it to adjust to the shrinking */
-  /* flex-direction: column; */
-  font-size: 2.0vmax;
+  flex-direction: inherit;
+  font-size: 3.80vmin;
   justify-content: center;
   background-color: rgb(21,21,21);
 }
@@ -69,36 +70,55 @@ div.card {
   background-color: rgb(21,21,21);
 }
 
+.bothbuttons {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(21,21,21);
+}
+
 .update {
   background-color: rgb(21,21,21);
+  justify-content: left;
+  
 }
 
 button.button {
   background: rgb(21,21,21);
   box-shadow: inset 0 0 0 15px rgb(21,21,21);
+  width: 70px;
+    height: 35px;
 }
 
   /* the button itself */
 a.btn.btn-outline-light {
   background: rgb(21,21,21);
   /* background: rgba(255,92,1); */
+  width: 70px;
+    height: 35px;
 }
 
   /* the hover over action */
 a.btn.btn-outline-light:hover {
     background: rgba(255,92,1);
    /* background: rgba(255,92,1); */
+   width: 70px;
+    height: 35px;
 }
 
 .delete {
     background-color: rgb(21,21,21);
+    border-radius: 0px 0px 5px 5px;
+    width: 70px;
+    height: 35px;
 }
 
   a.btn.btn-outline-danger {
-    width: 83.2px;
-    height: 37.6px;
+    width: 70px;
+    height: 35px;
     background-color: #ff4300;
     color: black;
+    /* display: flex allows it to adjust the text so that it doesn't go outside of its div */
+    display: flex;
   }
 
   a.btn.btn-outline-danger:hover {

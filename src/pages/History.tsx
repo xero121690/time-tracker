@@ -53,19 +53,19 @@ const History = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1024 },
-      items: 5,
+      items: 6,
     },
     desktop: {
       breakpoint: { max: 1024, min: 800 },
-      items: 4,
+      items: 5,
     },
     tablet: {
       breakpoint: { max: 800, min: 464 },
-      items: 2,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 2,
     },
   };
 
@@ -76,21 +76,26 @@ const History = () => {
         <h2 className="date">{data.date}</h2>
         <h3 className="time">{addSeconds(data.seconds)}</h3>
       </div>
-      <div className="update">
-        <button type="button" className="button">
-          <Link className="btn btn-outline-light" to={`/update/${data.DataID}`}>
-            Update
-          </Link>
-        </button>
-      </div>
-      <div className="delete">
-        <button
-          type="button"
-          className="button"
-          onClick={() => handleDelete(data.DataID)}
-        >
-          <a className="btn btn-outline-danger">Delete</a>
-        </button>
+      <div className="bothbuttons">
+        <div className="update">
+          <button type="button" className="button">
+            <Link
+              className="btn btn-outline-light"
+              to={`/update/${data.DataID}`}
+            >
+              Update
+            </Link>
+          </button>
+        </div>
+        <div className="delete">
+          <button
+            type="button"
+            className="button"
+            onClick={() => handleDelete(data.DataID)}
+          >
+            <a className="btn btn-outline-danger">Delete</a>
+          </button>
+        </div>
       </div>
     </div>
   ));
