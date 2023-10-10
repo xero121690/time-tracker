@@ -51,20 +51,21 @@ const History = () => {
   };
 
   const responsive = {
+    // had to edit this responsice design aspect of it because the card was not working with the buttons but this is good
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 1024 },
+      breakpoint: { max: 4000, min: 1180 },
       items: 6,
     },
     desktop: {
-      breakpoint: { max: 1024, min: 800 },
+      breakpoint: { max: 1180, min: 990 },
       items: 5,
     },
     tablet: {
-      breakpoint: { max: 800, min: 464 },
+      breakpoint: { max: 990, min: 620 },
       items: 3,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 620, min: 0 },
       items: 2,
     },
   };
