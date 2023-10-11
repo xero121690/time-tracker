@@ -33,17 +33,19 @@ const Update = () => {
   return (
     <>
       <div className="form">
-        <h1>Update the time</h1>
-        <input
-          type="text"
-          placeholder="seconds"
-          onChange={handleChange}
-          name="seconds"
-        />
-
-        <button className="formButton" onClick={handleClick}>
-          Update
-        </button>
+        <h1 className="updateTimeTitle">Update the time</h1>
+        <div className="inputDiv">
+          <input
+            className="updateInput"
+            type="text"
+            placeholder="seconds"
+            onChange={handleChange}
+            name="seconds"
+          />
+          <button className="formButton" onClick={handleClick}>
+            Update
+          </button>
+        </div>
       </div>
     </>
   );
