@@ -29,11 +29,11 @@ const Update = () => {
       console.log(err);
     }
   };
-  console.log(time);
+
   return (
     <>
       <div className="form">
-        <h1 className="updateTimeTitle">Update the time</h1>
+        <h1 className="updateTimeTitle">Time correction</h1>
         <div className="inputDiv">
           <input
             className="updateInput"
@@ -42,7 +42,16 @@ const Update = () => {
             onChange={handleChange}
             name="seconds"
           />
-          <button className="formButton" onClick={handleClick}>
+          <button
+            className="btn btn-outline-light update"
+            onClick={() => navigate("/history")}
+          >
+            Cancel
+          </button>
+          <button
+            className="btn btn-outline-danger update"
+            onClick={handleClick}
+          >
             Update
           </button>
         </div>

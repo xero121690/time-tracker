@@ -135,18 +135,29 @@ a.btn.btn-outline-light:hover {
   background-color: rgb(21,21,21);
   margin: 0 auto;
   border-radius: 15px 15px 15px 15px;
+  position: relative;
 }
+
 
 .updateInput {
   background-color: white;
+  position: absolute;
 }
 
-.formButton {
+.btn.btn-outline-light.update {
   background-color: white;
+  color: black;
+  position: absolute;
+  bottom: 10px;
+  right: 25%;
 }
 
-.formButton:hover {
+.btn.btn-outline-danger.update {
   background-color: #ff4300;
+  color: black;
+  position: absolute;
+  bottom: 10px;
+  right: 5%;
 }
 
 @media (max-width: 990px) and (min-width: 620px){
@@ -154,11 +165,25 @@ a.btn.btn-outline-light:hover {
     width: 500px;
     height: 400px;
   }
+  .btn.btn-outline-light.update {
+    right: 27%;
+  }
+  
+  .btn.btn-outline-danger.update {
+    right: 5%;
+  }
 }
 
 @media (max-width: 620px) {
   .inputDiv {
     width: 425px;
     height: 350px;
+  }
+  .btn.btn-outline-light.update {
+    right: 30%;
+  }
+  
+  .btn.btn-outline-danger.update {
+    right: 5%;
   }
 }
