@@ -138,11 +138,36 @@ a.btn.btn-outline-light:hover {
   position: relative;
 }
 
+.hours {
+  color: white;
+}
+
+.minutes {
+  color: white;
+  margin-left: 74px;
+}
+
+
+.inputContainer {
+  display: block;
+}
+
+
+
 
 .updateInput {
   background-color: white;
-  position: absolute;
+  width: 100px;
+  height: 50px;
+  margin-right: 20px;
 }
+
+.updateInput2 {
+  background-color: white;
+  width: 100px;
+  height: 50px;
+}
+
 
 .btn.btn-outline-light.update {
   background-color: white;

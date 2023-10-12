@@ -35,13 +35,79 @@ const Update = () => {
       <div className="form">
         <h1 className="updateTimeTitle">Time correction</h1>
         <div className="inputDiv">
-          <input
-            className="updateInput"
-            type="text"
-            placeholder="seconds"
-            onChange={handleChange}
-            name="seconds"
-          />
+          <div className="inputContainer">
+            <div className="inputContainer2">
+              <input
+                className="updateInput"
+                type="tel"
+                placeholder="01"
+                name="hours"
+              />
+              <input
+                className="updateInput2"
+                type="tel"
+                placeholder="00"
+                maxLength={2}
+              />
+            </div>
+            <div className="labels">
+              <label className="hours" htmlFor="hours">
+                Hours
+              </label>
+              <label className="minutes" htmlFor="minutes">
+                Minutes
+              </label>
+            </div>
+
+            <div className="inputContainer2">
+              <input
+                className="updateInput"
+                type="tel"
+                placeholder="01"
+                name="hours"
+              />
+              <input
+                className="updateInput2"
+                type="tel"
+                placeholder="00"
+                maxLength={2}
+              />
+            </div>
+
+            <div className="labels">
+              <label className="hours" htmlFor="hours">
+                Hours
+              </label>
+              <label className="minutes" htmlFor="minutes">
+                Minutes
+              </label>
+            </div>
+
+            <div className="inputContainer2">
+              <input
+                className="updateInput"
+                type="tel"
+                placeholder="01"
+                name="hours"
+              />
+              <input
+                className="updateInput2"
+                type="tel"
+                placeholder="00"
+                maxLength={2}
+              />
+            </div>
+
+            <div className="labels">
+              <label className="hours" htmlFor="hours">
+                Hours
+              </label>
+              <label className="minutes" htmlFor="minutes">
+                Minutes
+              </label>
+            </div>
+          </div>
+
           <button
             className="btn btn-outline-light update"
             onClick={() => navigate("/history")}
