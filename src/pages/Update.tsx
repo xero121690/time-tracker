@@ -55,7 +55,7 @@ const Update = () => {
               />
 
               <div
-                className="btn-group-vertical"
+                className="btn-group-vertical btn-group-sm"
                 role="group"
                 aria-label="Vertical radio toggle button group"
               >
@@ -67,7 +67,10 @@ const Update = () => {
                   autoComplete="off"
                   checked
                 />
-                <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
+                <label
+                  className="btn btn-outline-danger am"
+                  htmlFor="vbtn-radio1"
+                >
                   AM
                 </label>
                 <input
@@ -77,7 +80,10 @@ const Update = () => {
                   id="vbtn-radio2"
                   autoComplete="off"
                 />
-                <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
+                <label
+                  className="btn btn-outline-danger pm"
+                  htmlFor="vbtn-radio2"
+                >
                   PM
                 </label>
               </div>

@@ -133,19 +133,22 @@ a.btn.btn-outline-light:hover {
   width: 550px;
   height: 500px;
   background-color: rgb(21,21,21);
-  margin: -45px auto;
+  margin: -55px auto;
   border-radius: 15px 15px 15px 15px;
   position: relative;
 }
 
 .labels {
   background-color: rgb(21,21,21);
+  margin-top: -12px;
+  margin-bottom: 10px;
 }
 
 .hours {
   color: white;
   font-size: 80%;
   background-color: rgb(21,21,21);
+  
 }
 
 .minutes {
@@ -158,7 +161,7 @@ a.btn.btn-outline-light:hover {
 /* container that holds all inputs */
 .inputContainer {
   display: block;
-  margin-top: -100px;
+  margin-top: -60px;
   background-color: rgb(21,21,21);
   margin-right: 80px;
 }
@@ -186,26 +189,79 @@ a.btn.btn-outline-light:hover {
 
 input {
   caret-color: #ff4300;
+  text-align: center;
 }
 
 input:focus {
   outline: none;
 }
 
+input[type="tel"]::placeholder {
+             
+  /* Firefox, Chrome, Opera */
+  text-align: center
+}
 
+
+
+
+.btn-group-vertical {
+  border-color: #ff4300;
+  background-color: rgb(21,21,21);
+  width: 55px;
+  height: 42px;
+}
+
+.btn.btn-outline-danger.am {
+  background-color: rgb(21,21,21);
+  border-color: #ff4300;
+  color: #ff4300;
+  
+}
+
+.btn.btn-outline-danger.am:hover {
+  background-color: rgb(21,21,21);
+  border-color: #ff4300;
+  color: #ff4300;
+  
+}
+
+.btn.btn-outline-danger.pm {
+  background-color: rgb(21,21,21);
+  border-color: #ff4300;
+  color: #ff4300;
+}
+
+.btn.btn-outline-danger.pm:hover {
+  background-color: rgb(21,21,21);
+  border-color: #ff4300;
+  color: #ff4300;
+}
+
+.btn-check:checked + .btn.btn-outline-danger.pm {
+  background-color: #ff4300;
+  color: black;
+  border-color: #ff4300;
+}
+
+.btn-check:checked + .btn.btn-outline-danger.am {
+  background-color: #ff4300;
+  color: black;
+  border-color: #ff4300;
+}
 
 
 .updateInput {
   background-color: white;
   width: 100px;
-  height: 50px;
+  height: 55px;
   margin-right: 20px;
 }
 
 .updateInput2 {
   background-color: white;
   width: 100px;
-  height: 50px;
+  height: 55px;
   margin-bottom: 10px;
 }
 
