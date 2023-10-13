@@ -36,12 +36,72 @@ const Update = () => {
         <h1 className="updateTimeTitle">Time correction</h1>
         <div className="inputDiv">
           <div className="inputContainer">
+            <label className="starttime" htmlFor="starttime">
+              Start time
+            </label>
             <div className="inputContainer2">
               <input
                 className="updateInput"
                 type="tel"
-                placeholder="01"
+                placeholder="00"
                 name="hours"
+                maxLength={2}
+              />
+              <input
+                className="updateInput2"
+                type="tel"
+                placeholder="00"
+                maxLength={2}
+              />
+
+              <div
+                className="btn-group-vertical"
+                role="group"
+                aria-label="Vertical radio toggle button group"
+              >
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="vbtn-radio"
+                  id="vbtn-radio1"
+                  autoComplete="off"
+                  checked
+                />
+                <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
+                  AM
+                </label>
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="vbtn-radio"
+                  id="vbtn-radio2"
+                  autoComplete="off"
+                />
+                <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
+                  PM
+                </label>
+              </div>
+            </div>
+            <div className="labels">
+              <label className="hours" htmlFor="hours">
+                Hour
+              </label>
+              <label className="minutes" htmlFor="minutes">
+                Minute
+              </label>
+            </div>
+
+            <label className="endtime" htmlFor="endtime">
+              End time
+            </label>
+
+            <div className="inputContainer2">
+              <input
+                className="updateInput"
+                type="tel"
+                placeholder="00"
+                name="hours"
+                maxLength={2}
               />
               <input
                 className="updateInput2"
@@ -50,21 +110,27 @@ const Update = () => {
                 maxLength={2}
               />
             </div>
+
             <div className="labels">
               <label className="hours" htmlFor="hours">
-                Hours
+                Hour
               </label>
               <label className="minutes" htmlFor="minutes">
-                Minutes
+                Minute
               </label>
             </div>
+
+            <label className="lunchtime" htmlFor="lunchtime">
+              Lunch time
+            </label>
 
             <div className="inputContainer2">
               <input
                 className="updateInput"
                 type="tel"
-                placeholder="01"
+                placeholder="00"
                 name="hours"
+                maxLength={2}
               />
               <input
                 className="updateInput2"
@@ -76,34 +142,10 @@ const Update = () => {
 
             <div className="labels">
               <label className="hours" htmlFor="hours">
-                Hours
+                Hour
               </label>
               <label className="minutes" htmlFor="minutes">
-                Minutes
-              </label>
-            </div>
-
-            <div className="inputContainer2">
-              <input
-                className="updateInput"
-                type="tel"
-                placeholder="01"
-                name="hours"
-              />
-              <input
-                className="updateInput2"
-                type="tel"
-                placeholder="00"
-                maxLength={2}
-              />
-            </div>
-
-            <div className="labels">
-              <label className="hours" htmlFor="hours">
-                Hours
-              </label>
-              <label className="minutes" htmlFor="minutes">
-                Minutes
+                Minute
               </label>
             </div>
           </div>

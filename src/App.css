@@ -131,25 +131,65 @@ a.btn.btn-outline-light:hover {
   justify-content: center;
   align-items: center;
   width: 550px;
-  height: 450px;
+  height: 500px;
   background-color: rgb(21,21,21);
-  margin: 0 auto;
+  margin: -45px auto;
   border-radius: 15px 15px 15px 15px;
   position: relative;
 }
 
+.labels {
+  background-color: rgb(21,21,21);
+}
+
 .hours {
   color: white;
+  font-size: 80%;
+  background-color: rgb(21,21,21);
 }
 
 .minutes {
   color: white;
-  margin-left: 74px;
+  margin-left: 92px;
+  font-size: 80%;
+  background-color: rgb(21,21,21);
 }
 
-
+/* container that holds all inputs */
 .inputContainer {
   display: block;
+  margin-top: -100px;
+  background-color: rgb(21,21,21);
+  margin-right: 80px;
+}
+
+/* labels outside inputcontainer2 */
+.starttime {
+  color: white;
+  background-color: rgb(21,21,21);
+}
+
+.endtime {
+  color: white;
+  background-color: rgb(21,21,21);
+}
+
+.lunchtime {
+  color: white;
+  background-color: rgb(21,21,21);
+}
+
+.inputContainer2 {
+  margin-top: 10px;
+  background-color: rgb(21,21,21);
+}
+
+input {
+  caret-color: #ff4300;
+}
+
+input:focus {
+  outline: none;
 }
 
 
@@ -166,7 +206,18 @@ a.btn.btn-outline-light:hover {
   background-color: white;
   width: 100px;
   height: 50px;
+  margin-bottom: 10px;
 }
+
+/* need to work on this */
+
+btn.btn-outline-danger:checked + #vbtn-radio1 {
+  background-color: #ff4300;/* Change this to your desired background color */
+}
+
+
+
+
 
 
 .btn.btn-outline-light.update {
@@ -187,8 +238,8 @@ a.btn.btn-outline-light:hover {
 
 @media (max-width: 990px) and (min-width: 620px){
   .inputDiv {
-    width: 500px;
-    height: 400px;
+    width: 525px;
+    height: 495px;
   }
   .btn.btn-outline-light.update {
     right: 27%;
@@ -197,18 +248,24 @@ a.btn.btn-outline-light:hover {
   .btn.btn-outline-danger.update {
     right: 5%;
   }
+
+  
+  
+ 
 }
 
 @media (max-width: 620px) {
   .inputDiv {
-    width: 425px;
-    height: 350px;
+    width: 420px;
+    height: 490px;
   }
   .btn.btn-outline-light.update {
     right: 30%;
+    bottom: 0px;
   }
   
   .btn.btn-outline-danger.update {
     right: 5%;
+    bottom: 0px;
   }
 }
