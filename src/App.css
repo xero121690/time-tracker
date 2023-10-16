@@ -163,7 +163,8 @@ a.btn.btn-outline-light:hover {
   display: block;
   margin-top: -60px;
   background-color: rgb(21,21,21);
-  margin-right: 80px;
+  margin: auto;
+  margin-top: 50px;
 }
 
 /* labels outside inputcontainer2 */
@@ -202,7 +203,9 @@ input[type="tel"]::placeholder {
   text-align: center
 }
 
-
+.btn-group-vertical.btn-group-sm {
+  margin-left: 20px;
+}
 
 
 .btn-group-vertical {

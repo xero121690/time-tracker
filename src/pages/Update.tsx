@@ -7,6 +7,10 @@ const Update = () => {
     seconds: "",
   });
 
+  const [tempHours, setTempHours] = useState({
+    hours: parseInt("00"),
+  });
+
   const navigate = useNavigate();
   const location = useLocation();
   type InputEvent = React.ChangeEvent<HTMLInputElement>;
@@ -16,6 +20,12 @@ const Update = () => {
 
   const handleChange = (e: InputEvent) => {
     setTime((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  //************HANDLE ERRORS HERE*************** */
+  const handleChangeHours = (e: InputEvent) => {
+    let tempHour = parseInt(e.target.value);
+    //assuming anything between 00 - 12
   };
 
   const handleClick = async (e: ButtonEvent) => {
@@ -46,6 +56,8 @@ const Update = () => {
                 placeholder="00"
                 name="hours"
                 maxLength={2}
+                value={tempHours.hours.toString()}
+                onChange={handleChangeHours}
               />
               <input
                 className="updateInput2"
@@ -65,7 +77,7 @@ const Update = () => {
                   name="vbtn-radio"
                   id="vbtn-radio1"
                   autoComplete="off"
-                  checked
+                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-danger am"
@@ -115,6 +127,40 @@ const Update = () => {
                 placeholder="00"
                 maxLength={2}
               />
+
+              <div
+                className="btn-group-vertical btn-group-sm"
+                role="group"
+                aria-label="Vertical radio toggle button group"
+              >
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="vbtn-radio2"
+                  id="vbtn-radio2-1"
+                  autoComplete="off"
+                  defaultChecked
+                />
+                <label
+                  className="btn btn-outline-danger am"
+                  htmlFor="vbtn-radio2-1"
+                >
+                  AM
+                </label>
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="vbtn-radio2"
+                  id="vbtn-radio2-2"
+                  autoComplete="off"
+                />
+                <label
+                  className="btn btn-outline-danger pm"
+                  htmlFor="vbtn-radio2-2"
+                >
+                  PM
+                </label>
+              </div>
             </div>
 
             <div className="labels">
