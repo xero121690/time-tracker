@@ -8,7 +8,7 @@ const Update = () => {
   });
 
   const [tempHours, setTempHours] = useState({
-    hours: parseInt("00"),
+    hours: "",
   });
 
   const navigate = useNavigate();
@@ -24,8 +24,11 @@ const Update = () => {
 
   //************HANDLE ERRORS HERE*************** */
   const handleChangeHours = (e: InputEvent) => {
-    let tempHour = parseInt(e.target.value);
     //assuming anything between 00 - 12
+
+    setTempHours(() => ({
+      hours: e.target.value,
+    }));
   };
 
   const handleClick = async (e: ButtonEvent) => {
@@ -56,7 +59,7 @@ const Update = () => {
                 placeholder="00"
                 name="hours"
                 maxLength={2}
-                value={tempHours.hours.toString()}
+                value={tempHours.hours}
                 onChange={handleChangeHours}
               />
               <input
