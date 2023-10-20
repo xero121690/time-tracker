@@ -30,9 +30,65 @@ div button {
 }
 
 
+/* modal */
 
 
 
+.btn.btn-outline-danger {
+  background-color: #ff4300;
+  color: black;
+  
+}
+
+.btn.btn-outline-danger:hover {
+  
+  background-color: #ff4300;
+  color: black;
+}
+
+.btn.btn-outline-light.cancel {
+  background-color: white;
+  color: black;
+}
+
+.modal-title.fs-5 {
+  background-color: rgb(21,21,21);
+}
+
+
+/* .btn.btn-outline-light.modal:hover {
+  
+  background-color: #ff4300;
+  color: black;
+} */
+
+div.modal-footer {
+  background-color: rgb(21,21,21);
+}
+
+div.buttonclose {
+  background-color: rgb(21,21,21);
+  margin-top: -10px;
+}
+
+.modal-header {
+  background-color: rgb(21,21,21);
+}
+
+.modal-content {
+  background-color: rgb(21,21,21);
+}
+
+/* color of fade in of delete confirmation */
+.modal.fade.show {
+  opacity: 0.94;
+}
+
+
+
+
+
+/* modal */
 
 /* carousel  */
 

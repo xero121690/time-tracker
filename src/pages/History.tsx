@@ -101,21 +101,26 @@ const History = () => {
           </button>
         </div>
         <div className="delete">
-          <button type="button" className="button">
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            className="button"
+          >
             <a className="btn btn-outline-danger">Delete</a>
           </button>
         </div>
 
         {/*moved the div elements outside the carousel even though they were inside carousel at first as trial run */}
 
-        <button
+        {/* <button
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
           Launch
-        </button>
+        </button> */}
 
         {/*  */}
       </div>
@@ -126,7 +131,7 @@ const History = () => {
     <div className="main">
       <h1 className="history">History</h1>
 
-      {/*  */}
+      {/* BS modal */}
 
       <div
         className="modal fade"
@@ -135,30 +140,32 @@ const History = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Modal title
+                Are you sure you want to delete?
               </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <div className="buttonclose" data-bs-theme="dark">
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
             </div>
-            <div className="modal-body">...</div>
+            {/* <div className="modal-body">Are you sure you want to delete?</div> */}
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-outline-light cancel"
                 data-bs-dismiss="modal"
               >
-                Close
+                Cancel
               </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
+              <button type="button" className="btn btn-outline-danger">
+                Delete
               </button>
             </div>
           </div>
