@@ -125,27 +125,30 @@ function Timer() {
         {/* Thursday, August 17, 2023 */}
         <h1>{date.toLocaleDateString("en-US", options)}</h1>
         <h1>{time.toLocaleTimeString()}</h1>
-        {startButton ? (
-          <button
-            type="button"
-            className="btn btn-primary btn-lg"
-            onClick={recordTime}
-          >
-            Start
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-primary btn-lg"
-            onClick={stopTime}
-          >
-            Stop
-          </button>
-        )}
-        <p>Start time:</p>
-        <p>{storeTime}</p>
+        <div>
+          {startButton ? (
+            <button
+              type="button"
+              className="btn btn-primary btn-lg"
+              onClick={recordTime}
+            >
+              Start
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-primary btn-lg"
+              onClick={stopTime}
+            >
+              Stop
+            </button>
+          )}
+        </div>
+
+        <p className="timerText">Start time:</p>
+        <p className="timerText">{storeTime}</p>
         {/* displays recorded time only after you press stop */}
-        <p>{displaySeconds}</p>
+        <p className="timerText">{displaySeconds}</p>
 
         <div>
           <button type="button" className="history">

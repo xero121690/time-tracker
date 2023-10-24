@@ -27,21 +27,40 @@ div button {
   color: #ff4300;
   font-weight: bolder;
   margin-bottom: 8rem;
+  margin-right: 25px;
 }
+
+p.timerText {
+  color: white;
+}
+
+/* timer */
+
+.btn.btn-primary.btn-lg {
+  color: black;
+  background-color: #ff4300;
+  --bs-btn-padding-y: 0.3rem;
+  border-color: #ff4300;
+}
+
+.btn.btn-primary.btn-lg:active {
+  color: black;
+  background-color: #ff4300;
+  --bs-btn-padding-y: 0.3rem;
+  border-color: #ff4300;
+}
+
+
+/* timer  */
 
 
 /* modal */
 
 
 
-.btn.btn-outline-danger {
-  background-color: #ff4300;
-  color: black;
-  
-}
-
-.btn.btn-outline-danger:hover {
-  
+.btn.btn-outline-danger.delete,
+.btn.btn-outline-danger.delete:hover,
+.btn.btn-outline-danger.delete:active {
   background-color: #ff4300;
   color: black;
 }
@@ -344,6 +363,14 @@ btn.btn-outline-danger:checked + #vbtn-radio1 {
 }
 
 .btn.btn-outline-danger.update {
+  background-color: #ff4300;
+  color: black;
+  position: absolute;
+  bottom: 10px;
+  right: 5%;
+}
+
+.btn.btn-outline-danger.update:active {
   background-color: #ff4300;
   color: black;
   position: absolute;

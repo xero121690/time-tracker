@@ -164,7 +164,7 @@ const History = () => {
               >
                 Cancel
               </button>
-              <button type="button" className="btn btn-outline-danger">
+              <button type="button" className="btn btn-outline-danger delete">
                 Delete
               </button>
             </div>
