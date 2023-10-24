@@ -158,6 +158,11 @@ div.card {
  
 }
 
+/* buttons in card update/delete */
+.button {
+  background-color: rgb(21,21,21);
+}
+
 
 
   /* the button itself */

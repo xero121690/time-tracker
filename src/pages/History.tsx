@@ -13,6 +13,7 @@ const History = () => {
   };
 
   const [history, setHistory] = useState([]);
+  const [tempID, setTempID] = useState("");
 
   useEffect(() => {
     const urlStartTimer = "http://127.0.0.1:3000/retrieve";
@@ -70,6 +71,10 @@ const History = () => {
     },
   };
 
+  const store = (iD: string) => {
+    setTempID(iD);
+  };
+
   /*
    <button
             type="button"
@@ -106,6 +111,9 @@ const History = () => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             className="button"
+            onClick={() => {
+              store(data.DataID);
+            }}
           >
             <a className="btn btn-outline-danger">Delete</a>
           </button>
@@ -164,7 +172,13 @@ const History = () => {
               >
                 Cancel
               </button>
-              <button type="button" className="btn btn-outline-danger delete">
+              <button
+                type="button"
+                className="btn btn-outline-danger delete"
+                onClick={() => {
+                  handleDelete(tempID);
+                }}
+              >
                 Delete
               </button>
             </div>
